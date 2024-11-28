@@ -72,3 +72,5 @@ git status
 git remote add save https://github.com/nic-vo/fcc-worldcup.git
 git branch
 git add .
+pg_dump -U freecodecamp worldcup > worldcup.sql
+git add .
