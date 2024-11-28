@@ -18,11 +18,13 @@ do
   then
     continue
   fi
-
   # query if winner_id in teams
-
+  WINNER_ID="$($PSQL "SELECT name FROM teams WHERE name='$WINNER'")"
   # if no winner_id
-
+  if [[ -z $WINNER_ID ]]
+  then
+    echo "$($PSQL "INSERT INTO teams(name) VALUES('$WINNER');"): $WINNER"
+  fi
   # insert winner into teams 
 
   # query winner_id
