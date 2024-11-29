@@ -429,3 +429,7 @@ psql -U freecodecamp -d worldcup -f worldcup.sql
 ./queries.sh
 ./queries.sh
 ./queries.sh
+pg_dump -U freecodecamp worldcup > worldcup.sql
+git status
+git .
+git add .
