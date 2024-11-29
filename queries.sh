@@ -29,13 +29,13 @@ echo -e "\nWinner of the 2018 tournament team name:"
 echo "$($PSQL "SELECT name FROM games FULL JOIN teams ON games.winner_id = teams.team_id WHERE year=2018 AND round='Final';")"
 
 echo -e "\nList of teams who played in the 2014 'Eighth-Final' round:"
-echo "$($PSQL "SELECT tone.name,ttwo.name FROM games FULL JOIN teams AS tone ON games.winner_id = tone.team_id FULL JOIN teams AS ttwo ON games.opponent_id = ttwo.team_id WHERE year=2014 AND round='Eighth-Final';")"
+echo "$($PSQL "SELECT DISTINCT(name) FROM teams LEFT JOIN games AS gw ON teams.team_id = gw.winner_id LEFT JOIN games AS go ON teams.team_id = go.opponent_id WHERE (go.year=2014 AND go.round='Eighth-Final') OR (gw.year=2014 AND gw.round='Eighth-Final') ORDER BY name;")"
 
 echo -e "\nList of unique winning team names in the whole data set:"
-echo "$($PSQL "SELECT DISTINCT(name) FROM games LEFT JOIN teams ON games.winner_id = teams.team_id")"
+echo "$($PSQL "SELECT DISTINCT(name) FROM games LEFT JOIN teams ON games.winner_id = teams.team_id ORDER BY name")"
 
 echo -e "\nYear and team name of all the champions:"
-echo "$($PSQL "SELECT year,name FROM games LEFT JOIN teams ON games.winner_id = teams.team_id WHERE round='Final';")"
+echo "$($PSQL "SELECT year,name FROM games LEFT JOIN teams ON games.winner_id = teams.team_id WHERE round='Final' ORDER BY year;")"
 
 echo -e "\nList of teams that start with 'Co':"
 echo "$($PSQL "SELECT name FROM teams WHERE name LIKE 'Co%';")"
